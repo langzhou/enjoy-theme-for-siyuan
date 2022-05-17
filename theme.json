@@ -1,0 +1,9 @@
+{
+  "name":   "enjoy",
+  "author": "lang zhou",
+  "url":    "https://github.com/langzhou/enjoy-theme-for-siyuan",
+  "version": "0.0.1",
+  "modes": [
+    "light"
+  ]
+}
