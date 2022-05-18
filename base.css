@@ -1650,8 +1650,8 @@ span[data-type="tag"][data-content="低优先级"] {
 /* 待办事项已完成的样式 */
 .protyle-task--done > .p,
 .protyle-task--done > .protyle-action svg {
-  opacity: 0.5;
-  text-decoration: line-through;
+  opacity: 0.7;
+  /* text-decoration: line-through; */
 }
 
 /**** 引述 ****/
