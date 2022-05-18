@@ -48,18 +48,17 @@
   left: 165px;
   top: 7px;
 }
-#toolbar svg{
-  color:#888;
+#toolbar svg {
+  opacity: 0.7;
+  width: 12px;
+  height: 12px;
 }
-#toolbar svg:hover{
-  color:#333;
+#toolbar svg:hover {
+  color: #333;
 }
 #toolbar > #barMore > svg {
   width: 10px;
 }
-
-
-
 
 /**** 实验功能：全屏下自动隐藏顶部工具栏 ****
 1）需要将 min-height 和 min-width 设置成自己电脑全屏时的分辨率
@@ -106,7 +105,7 @@
   /*     background-color: var(--b3-theme-surface);
   color: var(--b3-theme-on-surface); */
 }
-.block__icons .counter{
+.block__icons .counter {
   background-color: transparent;
 }
 /* 边栏列表项 */
@@ -301,7 +300,8 @@ div[data-type="more"] > svg {
 }
 
 /* 内容区 - 标签/书签 */
-.layout-tab-bar .item__icon>img, .layout-tab-bar .item__icon>svg {
+.layout-tab-bar .item__icon > img,
+.layout-tab-bar .item__icon > svg {
   height: 18px;
   width: 18px;
   padding-bottom: 2px;
@@ -380,7 +380,7 @@ div[data-type="more"] > svg {
   > .b3-list
   > .b3-list--empty {
   padding: 4px 24px;
-  color: #000;
+  color: #888;
 }
 
 /* 内容区 - 文档树专属 */
@@ -644,7 +644,7 @@ background-attachment: fixed;
 
 /* 菜单项 */
 .b3-menu__item {
-  padding: 4px 16px 4px 16px;
+  padding: 3px 16px 3px 16px;
   color: var(--b3-theme-on-surface);
 }
 
@@ -786,7 +786,7 @@ background-attachment: fixed;
 /************** 二、文档编辑区 **************************/
 
 /**编辑器**/
-.protyle-title__input{
+.protyle-title__input {
   background-color: transparent;
 }
 .protyle-content > .protyle-background {
@@ -795,7 +795,7 @@ background-attachment: fixed;
 
 .protyle-background .protyle-background__iconw {
   left: max(calc((100% - min(1380px, max(808px, 49vw))) / 2), 96px) !important;
-    /* height: auto; */
+  /* height: auto; */
   width: 256px;
   margin-left: 3px;
   /* display: block; */
@@ -913,7 +913,7 @@ background-attachment: fixed;
 
 .layout-tab-bar .item__text {
   border-bottom: 2px solid transparent;
-  padding: 4px  6px;
+  padding: 4px 6px;
   text-overflow: ellipsis;
   opacity: 0.6;
 }
@@ -986,25 +986,40 @@ background-attachment: fixed;
   padding-left: 2px;
   padding-right: 7px;
 } */
-.protyle-breadcrumb > .protyle-breadcrumb__bar > .protyle-breadcrumb__item:first-child > svg.ft__primary {
+.protyle-breadcrumb
+  > .protyle-breadcrumb__bar
+  > .protyle-breadcrumb__item:first-child
+  > svg.ft__primary {
   color: #b9b9b9;
   width: 11px;
   height: 11px;
   margin-right: 0;
   display: block;
 }
-.protyle-breadcrumb > .protyle-breadcrumb__bar > .protyle-breadcrumb__item:first-child:hover > svg {
+.protyle-breadcrumb
+  > .protyle-breadcrumb__bar
+  > .protyle-breadcrumb__item:first-child:hover
+  > svg {
   color: #000;
 }
-.protyle-breadcrumb > .protyle-breadcrumb__bar > .protyle-breadcrumb__item > svg.popover__block {
+.protyle-breadcrumb
+  > .protyle-breadcrumb__bar
+  > .protyle-breadcrumb__item
+  > svg.popover__block {
   display: none;
 }
-.protyle-breadcrumb > .protyle-breadcrumb__bar > .protyle-breadcrumb__item > span.protyle-breadcrumb__text {
+.protyle-breadcrumb
+  > .protyle-breadcrumb__bar
+  > .protyle-breadcrumb__item
+  > span.protyle-breadcrumb__text {
   color: #999;
   font-size: 12px;
-  margin:0 2px;
+  margin: 0 2px;
 }
-.protyle-breadcrumb > .protyle-breadcrumb__bar > .protyle-breadcrumb__item > span.protyle-breadcrumb__text:hover {
+.protyle-breadcrumb
+  > .protyle-breadcrumb__bar
+  > .protyle-breadcrumb__item
+  > span.protyle-breadcrumb__text:hover {
   color: #000;
 }
 .protyle-breadcrumb > .protyle-breadcrumb__bar > svg.protyle-breadcrumb__arrow {
@@ -1013,7 +1028,10 @@ background-attachment: fixed;
   background-position: 50% 50%;
   background-image: url(data:image/png;base64,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);
 }
-.protyle-breadcrumb > .protyle-breadcrumb__bar > svg.protyle-breadcrumb__arrow > * {
+.protyle-breadcrumb
+  > .protyle-breadcrumb__bar
+  > svg.protyle-breadcrumb__arrow
+  > * {
   display: none;
 }
 .protyle-breadcrumb > button > svg {
@@ -1022,28 +1040,7 @@ background-attachment: fixed;
 .protyle-breadcrumb > button:hover > svg {
   color: #000;
 }
-/* 设置编辑区的面包屑样式，浮窗中的面包屑不受影响 */
-/* 样式 1：透明背景 *
-.layout__center .protyle-breadcrumb{
-  background: transparent;
-}
-.layout__center .protyle-breadcrumb__bar{
-  background-color: var(--b3-theme-surface);
-  border-radius: 100px;
-  padding: 4px 6px;
-}
-/* 样式 1 代码结束 */
 
-/* 样式 2：非透明背景 *
-.layout__center .protyle-breadcrumb{
-  background:  var(--b3-theme-background);
-}
-.layout__center .protyle-breadcrumb__bar{
-  background-color: var(--b3-theme-surface);
-  border-radius: 100px;
-  padding: 4px 6px;
-}
-/* 样式 2 代码结束 */
 
 /**** 浮出工具栏 ****/
 .protyle-toolbar {
@@ -1269,18 +1266,7 @@ background-attachment: fixed;
 
 /* 样式一 代码结束 */
 
-/* 样式二：背景色 *
-.protyle-wysiwyg [data-node-id] span[data-type="block-ref"]{
-  border-bottom: none;
-  background-color: var(--b3-theme-primary-lightest);
-  padding:  1px 2px ;
-  margin: 0px 2px;
-  border-radius: 1px;
-}
-.protyle-wysiwyg [data-node-id] span[data-type="block-ref"]:hover{
- background-color: var(--b3-theme-primary-lighter);
-}
-/* 样式二 代码结束 */
+
 
 /**** 超级链接 ****/
 .b3-typography a,
@@ -1526,6 +1512,11 @@ span[data-type="tag"][data-content="低优先级"] {
 
 /**** 嵌入块 ****/
 
+.protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"]{
+  background-color: var(--b3-theme-surface-light);
+  border-radius: 0 4px 4px 0;
+}
+
 /* iframe */
 .b3-typography iframe,
 .protyle-wysiwyg iframe {
@@ -1706,116 +1697,3 @@ span[data-type="tag"][data-content="低优先级"] {
   background-color: var(--b3-theme-surface) !important;
 }
 
-/*********实验功能：毛玻璃效果 代码开始 ******
-1）需要关闭左边栏背景色、背景图功能
-************
-body{
-  background-color: white;
-  background-image: var(--background-image);
-  background-position: center top;
-background-size: cover;
-}
-
-.fn__flex-1.fn__flex [data-type='wnd']{
-  background: transparent; 
-  min-height: 90% !important;
-  margin:  10px;
-  padding: 10px;
-  position: relative;    
-  box-shadow: var(--glass-box-shadow);
-overflow: hidden;
-z-index: 2;
-box-sizing: border-box;
-  border-radius: 6px;
-}
-.layout__center .fn__flex-1.fn__flex [data-type='wnd']{
-  margin:  10px auto;
-  padding: 10px 0px;
-  max-width: 1030px;
-}
-
-[data-type='wnd']::before{
-  content: '';
-position: absolute;
-top: 0;	left: 0; right: 0;	bottom: 0;
-z-index: -3;   
-background-image: var(--background-image);  
-background-position: center top;
-background-size: cover;
-background-attachment: fixed;
-  background:var(--glass-editor-background);
-  backdrop-filter: blur(var(--blur-value));
-}
-
-.layout__center .fn__flex{
-  padding-right: 8px;
-  padding-left: 8px;
-}
-
-.protyle-background{
-  margin: 10px;
-  border-radius: 8px;
-}
-
-.toolbar,#dockLeft, #dockRight, #dockTop, #dockBottom{
-  background: transparent;
-  border: none;
-  opacity: 0;
-  transition: opacity 400ms ease 0s;
-}
-.toolbar:hover,#dockLeft:hover, #dockRight:hover, #dockTop:hover, #dockBottom:hover{
-  opacity: 1;
-}
-
-.layout__empty, .layout__center .layout-tab-bar, .layout__center .layout-tab-bar .item,
-.protyle-preview,.protyle-preview__action,.graph,
-[data-type='wnd'] .layout-tab-container ,[data-type='wnd'] .protyle,[data-type='wnd'] .protyle-content,[data-type='wnd'] .protyle-wysiwyg,.block__icons,
-.search__label .b3-form__icon-input,
-.b3-dialog__container,.layout__center .protyle-title__input,
-.b3-tab-container,.config-account__center--text,.spread-search__preview,.protyle-breadcrumb,
-.search__header .b3-text-filed--text,.b3-text-filed,
-.b3-dialog__scrim,.b3-menu__item,
-.protyle-toolbar,
-.block__popover,.block__popover .protyle, 
-.protyle-breadcrumb__bar,
-.fn__flex-shrink, .fn__flex-shrink .block__icons,
-.b3-typography table tr, .protyle-wysiwyg table tr{
-  background: transparent !important;
- 
-}
-.b3-menu__item:hover:not(.b3-menu__item--readonly):not(.b3-menu__item--custom), .b3-menu__item--current{
-  background-color: var(--b3-list-hover) !important;
-}
-
-.protyle-preview__action button{
-  background-color:rgba(255, 255, 255, 0.8);
-}
-
-.b3-typography table tr:hover, .protyle-wysiwyg table tr:hover{
-  background-color: rgba(255, 255, 255, 0.3) !important;
-}
-
-.protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"]{
-  background-color: rgba(255, 255, 255, 0.5);
-}
-.b3-menu, .protyle-util,.protyle-gutters button{
-  background-color: rgba(255, 255, 255, 0.45); 
-}
-
-.protyle-toolbar,.block__popover,.protyle-breadcrumb__bar,
-.b3-dialog__container,.b3-menu, .protyle-util{ 
-  backdrop-filter: blur(var(--blur-value));
-}
-
-.protyle--fullscreen{
-background-image:var(--allen-background-image)!important;
-background-position:center;
-background-size:cover;
-background-repeat:no-repeat;    
-}
-.protyle--fullscreen .protyle-content{
-  background: transparent !important;
-  backdrop-filter: blur(var(--blur-value));
-}
-
-/******** 毛玻璃效果实验功能代码结束 ***************/
