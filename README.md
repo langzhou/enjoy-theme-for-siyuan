@@ -15,10 +15,15 @@
 
 #### 1. 行内评论
 
+支持划词评论。
+
 #### 2. 网页书签
 
 
 在网络链接编辑弹框中点击「复制网页书签」，然后粘贴到笔记正文中，即可插入 HTML 块，显示网页标签、摘要、配图（如果有）、链接。点击该 HTML 将跳转到对应的网页。
+
+![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/linkcard-1.png)
+![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/linkcard-2.png)
 
 ### 预览
 
