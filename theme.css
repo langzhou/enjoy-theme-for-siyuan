@@ -3,8 +3,11 @@
 2. 标注为「实验功能」的部分请谨慎开启使用。
 /****************************************/
 
+/* 引入插件相关样式 */
+@import url("style/plugin.css");
+
 /* 引入配色方案 */
-@import url("winter.css");
+@import url("style/colors.css");
 
 /* 引入网址链接前的图标相关代码 */
 @import url("style/link-icon.css");
@@ -13,4 +16,4 @@
 
 
 /* 引入基本框架 */
-@import url("base.css");
+@import url("style/base.css");

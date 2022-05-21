@@ -1,8 +1,3 @@
-/******* Theme for SiYuan Note ************
-1. 本样式仅在16px字号设置下进行有限场景的测试，不能保证所有页面均完美呈现。如果遇到相关功能或样式问题，请重置为官方主题后再确认问题是否重现。
-2. 标注为「实验功能」的部分请谨慎开启使用。
-/****************************************/
-
 /************** 一、页面框架与控件 ***********************/
 
 /**** 顶部工具栏 toolbar ****/
@@ -19,7 +14,7 @@
 #toolbar > #toolbarVIP {
   position: absolute;
   left: 193px;
-  top: 3px;
+  top: 6px;
 }
 #toolbar > #barDock,
 #barThemeMode,
@@ -59,19 +54,6 @@
 #toolbar > #barMore > svg {
   width: 10px;
 }
-
-/**** 实验功能：全屏下自动隐藏顶部工具栏 ****
-1）需要将 min-height 和 min-width 设置成自己电脑全屏时的分辨率
-2）如果需要鼠标悬浮时显示，请将.toolbar{height:0px;}设置为一个较小的高度值，如 8px
-****
-@media only screen and (min-height: 900px) and (min-width: 1440px)
-{
-  .toolbar{ height: 0px; transition: height 400ms ease 0s; }
-  .toolbar > div{  visibility: hidden; }
-  .toolbar:hover{  height: 30px; transition: height 400ms ease 0s; }
-  .toolbar:hover >div{  visibility: visible; }
-}
-/**** 实验功能代码结束 ****/
 
 /**** 停靠栏 dock ****/
 #dockLeft,
@@ -588,50 +570,6 @@ div[data-type="more"] > svg {
   background-color: #e9eaea;
 }
 
-/**** 左边栏背景色 代码结束 ****/
-
-/**** 实验功能：开启左边栏背景图 ****
-1）需要在配色文件中设置背景图
-2）需要关闭左边栏背景色及毛玻璃效果
-****
-body{
-  background-image: var(--background-image);
-  background-position: center top;
-background-size: cover;
-}
-.toolbar,#dockLeft, #dockRight, #dockTop, #dockBottom{
-  background: transparent;
-}
-.fn__flex-shrink div{
-  background: transparent;
-}
-.fn__flex-shrink {
-  position: relative;
-overflow: hidden;
-z-index: 2;
-box-sizing: border-box;
-} 
-.fn__flex-shrink::before{
-  content: '';
-position: absolute;
-top: 0;	left: 0; right: 0;	bottom: 0;
--webkit-filter: blur(var(--blur-value));
--moz-filter: blur(var(--blur-value));
--ms-filter: blur(var(--blur-value));
--o-filter: blur(var(--blur-value));
-filter: blur(var(--blur-value));
-z-index: -3;   
-background-image: var(--background-image);  
-background-position: center top;
-background-size: cover;
-background-attachment: fixed;
-}
-
-#layouts > .fn__flex-1 > .fn__flex-column ::-webkit-scrollbar{ width: 6px;}
-#layouts > .fn__flex-1 > .fn__flex-column ::-webkit-scrollbar-thumb{ background-color: rgba(23, 155, 147, 0.13);}
-#layouts > .fn__flex-1 > .fn__flex-column ::-webkit-scrollbar-thumb:hover{ background-color: rgba(20, 20, 20, 0.13);}
-/*********** 开启左边栏背景图 代码结束 ***********/
-
 /**** 反链面板 ****/
 
 /**** 关系图 ****/
@@ -883,21 +821,6 @@ background-attachment: fixed;
   margin: 0 4px;
 }
 
-/** 页签项包含3种样式，使用时需要注释另一种样式 **/
-/* 样式 1：官方默认 
-需要将页签栏颜色设置为与背景色不同
-*
-.layout-tab-bar{
-  border: none;
-}
-.layout-tab-bar .item{
-  padding: 8px;     
-}
-/* 样式 1 代码结束 */
-
-/* 样式 2：下划线 
-需要将页签栏颜色设置为与背景色相同
-*/
 .layout-tab-bar .item {
   padding: 0 8px;
   background-color: transparent;
@@ -917,60 +840,6 @@ background-attachment: fixed;
   text-overflow: ellipsis;
   opacity: 0.6;
 }
-
-/* 样式 2 代码结束 */
-
-/* 样式 3：圆点 *
-.layout-tab-bar{
-  border: none;
-  padding-left: 10px;
-}
-.layout-tab-bar .item{
-  border-radius: 40px;
-  margin: 6px 0px 4px 0px;
-  padding: 4px;
-  border-bottom: none;
-  background: transparent;
-}
-.layout-tab-bar .item__text{
-  padding: 0 0 0 15px;
-  color: var(--b3-theme-on-background);
-  text-overflow:ellipsis;
-  opacity: 0.6;
-}
-.layout__wnd--active .layout-tab-bar .item--focus .item__text{
-  color: var(--b3-theme-on-background);
-  border-color: transparent;
-  opacity: 1;
-}
-.layout-tab-bar .item__close{
-  margin-right: 10px !important;
-}
-
-.layout-tab-bar .item--focus .item__text::after{
-  background: transparent;
-  background-color: #1295c9;
-  position: absolute;
-  width:  4px;
-  height: 4px;
-  border-radius: 4px;
-  border: 1px solid var(--b3-theme-background);
-  box-shadow: 0 0 1px 1px #1295c9;
-  top:    8px;
-  left:   4px;
-}
-.layout-tab-bar .item--unupdate.item--focus .item__text::after{
-  background-color: #2ba81a;
-  border: 1px solid var(--b3-theme-background);
-  box-shadow: 0 0 1px 1px #2ba81a;
-}
-.layout-tab-bar .item--unupdate.item--focus{
-  color: var(--b3-theme-on-background) !important;
-}
-.layout-tab-bar .item--unupdate{
-  font-style: normal;
-}
-/* 样式 3 代码结束 */
 
 /**** 面包屑 ****/
 .protyle-breadcrumb .fn__flex-shrink {
@@ -1041,8 +910,7 @@ background-attachment: fixed;
   color: #000;
 }
 
-
-/**** 浮出工具栏 ****/
+/**** 浮出工具条 ****/
 .protyle-toolbar {
   border-radius: 30px;
   padding: 1px 10px;
@@ -1266,8 +1134,6 @@ background-attachment: fixed;
 
 /* 样式一 代码结束 */
 
-
-
 /**** 超级链接 ****/
 .b3-typography a,
 .protyle-wysiwyg [data-node-id] span[data-type="a"] {
@@ -1432,8 +1298,8 @@ span[data-type="tag"][data-content="低优先级"] {
   position: absolute;
   left: 4px;
   top: var(--padding-top-bottom);
-  -webkit-mask: url(src/iconTriangle.svg) no-repeat;
-  mask: url(src/iconTriangle.svg) no-repeat;
+  -webkit-mask: url(assets/iconTriangle.svg) no-repeat;
+  mask: url(assets/iconTriangle.svg) no-repeat;
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }
@@ -1512,7 +1378,7 @@ span[data-type="tag"][data-content="低优先级"] {
 
 /**** 嵌入块 ****/
 
-.protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"]{
+.protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"] {
   background-color: var(--b3-theme-surface-light);
   border-radius: 0 4px 4px 0;
 }
@@ -1696,4 +1562,3 @@ span[data-type="tag"][data-content="低优先级"] {
 .protyle-wysiwyg table tr:hover {
   background-color: var(--b3-theme-surface) !important;
 }
-

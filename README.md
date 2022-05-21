@@ -11,6 +11,15 @@
 | [Tsundoku](https://github.com/Achuan-2/siyuan-themes-tsundoku-stone) | 使用其链接图标方案 |
 |  [Ziliang_self](https://github.com/zilianghm/ziliang_self)| 使用其Toolbar、文档树、面包屑样式方案 |
 
+### 拓展功能
+
+#### 1. 行内评论
+
+#### 2. 网页书签
+
+
+在网络链接编辑弹框中点击「复制网页书签」，然后粘贴到笔记正文中，即可插入 HTML 块，显示网页标签、摘要、配图（如果有）、链接。点击该 HTML 将跳转到对应的网页。
+
 ### 预览
 
 
