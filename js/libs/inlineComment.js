@@ -25,7 +25,7 @@ export default class InlineComment {
     // setTimeout(()=>this.resolveCommentNodes(),1000) //等待文章内容加载完整后解析批注span todo
   }
 
-  async domWatch(mutation){
+  async domWatcher(mutation){
     if(mutation.addedNodes){
       let node = mutation.addedNodes.item(0)
       // 新增 protyle 节点，即判断为打开了新文档

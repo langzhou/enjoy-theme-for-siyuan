@@ -952,6 +952,10 @@ div[data-type="more"] > svg {
 .protyle-gutters {
   /* margin: 0.625em 0; */
 }
+/* 滚动动效 */
+.protyle-gutters{
+	transition: all 150ms ease-out;
+}
 
 /**** 块属性 ****/
 /* 将页面（标题）的属性移至左侧 */

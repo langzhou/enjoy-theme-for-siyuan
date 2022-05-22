@@ -2,7 +2,7 @@ import { request } from "../utils/network.js";
 import { snackbar, copyText } from "../utils/utils.js";
 
 export default class LinkCard {
-  async domWatch(mutation) {
+  async domWatcher(mutation) {
     if (mutation.target.childNodes.length == 1) {
       let node = mutation.target.childNodes[0];
       // 首先获取弹框元素，然后判断是否为网络链接

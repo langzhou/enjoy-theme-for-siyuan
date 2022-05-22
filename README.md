@@ -25,7 +25,7 @@
 ![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/linkcard-1.png)
 ![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/linkcard-2.png)
 
-### 预览
+### 主题预览
 
 
 ![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/preview.png?token=GHSAT0AAAAAABUPXBTMWFEVXQLTT5O4WQYGYUDRGDA)
