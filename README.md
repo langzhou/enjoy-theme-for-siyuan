@@ -31,6 +31,7 @@
 
 暂时仅支持豆瓣书目搜索以及创建书目笔记。
 
+![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/searchbox.png)
 ### 主题预览
 
 
