@@ -1,4 +1,4 @@
-/************** 一、页面框架与控件 ***********************/
+/* ----------- 一、页面框架与控件 ------------- */
 
 /**** 顶部工具栏 toolbar ****/
 .toolbar {
@@ -11,11 +11,7 @@
   justify-content: flex-start;
   /* background-color: #fafafa; */
 }
-#toolbar > #toolbarVIP {
-  position: absolute;
-  left: 193px;
-  top: 6px;
-}
+
 #toolbar > #barDock,
 #barThemeMode,
 #barBack,
@@ -23,16 +19,24 @@
   display: none;
 }
 
+#toolbar > #toolbarVIP {
+  position: absolute;
+  left: 193px;
+  top: 6px;
+}
+
 #toolbar > #barDailyNote {
   position: absolute;
   left: 80px;
   top: 6px;
 }
+
 #toolbar > #barSearch {
   position: absolute;
   left: 108px;
   top: 6px;
 }
+
 #toolbar > #barSync {
   position: absolute;
   left: 136px;
@@ -43,14 +47,17 @@
   left: 165px;
   top: 7px;
 }
+
 #toolbar svg {
   opacity: 0.7;
   width: 12px;
   height: 12px;
 }
+
 #toolbar svg:hover {
   color: #333;
 }
+
 #toolbar > #barMore > svg {
   width: 10px;
 }
@@ -120,10 +127,7 @@
 }
 
 /* 左边栏 */
-/**** 实验功能：左边栏背景色 ****
-1）在配色文件中设置背景色及文字颜色
-2）需要关闭左边栏背景图及毛玻璃效果
-*****/
+
 .fn__flex-shrink,
 .fn__flex-shrink .block__icons {
   background-color: var(--left-sidebar-background);
@@ -953,8 +957,8 @@ div[data-type="more"] > svg {
   /* margin: 0.625em 0; */
 }
 /* 滚动动效 */
-.protyle-gutters{
-	transition: all 150ms ease-out;
+.protyle-gutters {
+  transition: all 150ms ease-out;
 }
 
 /**** 块属性 ****/
@@ -1396,6 +1400,36 @@ span[data-type="tag"][data-content="低优先级"] {
 .b3-typography iframe:hover,
 .protyle-wysiwyg iframe:hover {
   /* border-color: var(--b3-border-color); */
+}
+
+.protyle-wysiwyg [data-node-id].iframe .protyle-action__drag:after {
+  content: "";
+  background-color: #eee;
+  width: 12px;
+  height: 2px;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 0px;
+  box-shadow: none;
+  box-sizing: border-box;
+  cursor: nwse-resize;
+}
+
+.protyle-wysiwyg [data-node-id].iframe .protyle-action__drag {
+  height: 12px;
+  width: 2px;
+  background-color: #eee;
+  display: none;
+  border-radius: 4px;
+  cursor: nwse-resize;
+  transition: var(--b3-transition);
+  position: absolute;
+  right: -4px;
+  bottom: 0;
+  box-shadow: none;
+  box-sizing: border-box;
 }
 
 /**** 标题 ****/
