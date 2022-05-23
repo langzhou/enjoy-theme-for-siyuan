@@ -25,6 +25,12 @@
 ![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/linkcard-1.png)
 ![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/linkcard-2.png)
 
+#### 3. 快捷搜索框
+
+`shift + alt + p` 呼出快捷搜索框
+
+暂时仅支持豆瓣书目搜索以及创建书目笔记。
+
 ### 主题预览
 
 

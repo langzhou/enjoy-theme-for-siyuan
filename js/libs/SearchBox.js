@@ -1,7 +1,9 @@
 import dropdownList from "./DropdownList.js"
 import { request } from "../utils/network.js"
 import config from "../config.js"
+import {actions} from './SearchBoxActions.js'
 
+console.log(Actions)
 class SearchBox {
   constructor() {
     this.searchBox = null
@@ -172,7 +174,9 @@ class SearchBox {
           this.createAction("豆瓣", "请输入书籍名称")
         }
 
-        
+        if (txt.search(/^暗黑\s/) == 0) {
+          this.createAction("暗黑", "回车切换暗黑模式")
+        }
       }
     }
   }
