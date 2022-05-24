@@ -151,15 +151,15 @@ class SiyuanPlugin {
       },
     }
 
-    if (toolbars) {
-      toolbars.forEach((item, index, node) => {
-        // console.log(item);
-        if (!item.querySelector(`[data-type="${data.type}"]`)) {
-          let fragment = this.createToolbarBtn(data)
-          item.appendChild(fragment)
-        }
-      })
-    }
+    // if (toolbars) {
+    //   toolbars.forEach((item, index, node) => {
+    //     // console.log(item);
+    //     if (!item.querySelector(`[data-type="${data.type}"]`)) {
+    //       let fragment = this.createToolbarBtn(data)
+    //       item.appendChild(fragment)
+    //     }
+    //   })
+    // }
   }
 
   createToolbarBtn(data) {

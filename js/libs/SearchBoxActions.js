@@ -90,7 +90,6 @@ const theme = {
   placeholder: "选择主题回车切换",
   themes: [],
   default: () => {
-    if (window.siyuan) {
       const lightThemes = window.siyuan.config.appearance.lightThemes.map(
         (item) => {
           return {
@@ -118,7 +117,6 @@ const theme = {
       theme.themes = lightThemes.concat(darkThemes)
 
       return lightThemes.concat(darkThemes)
-    }
   },
 
   search: (keyword, resolve, reject) => {

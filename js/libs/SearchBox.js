@@ -72,7 +72,7 @@ class SearchBox {
   }
 
   /**
-   * 搜索成功
+   * 搜索成功回调函数
    * @param {Array<object> | undefined} data
    */
   searchResolve(data) {
@@ -87,7 +87,7 @@ class SearchBox {
   }
 
   /**
-   * 搜索出错
+   * 搜索出错回调函数
    * @param {string | undefined} err
    */
   searchReject(err) {
