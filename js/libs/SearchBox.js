@@ -1,6 +1,6 @@
+import config from "../config.js"
 import dropdownList from "./DropdownList.js"
 import { request } from "../utils/network.js"
-import config from "../config.js"
 import { actions } from "./SearchBoxActions.js"
 import { snackbar } from "../utils/utils.js"
 
@@ -76,7 +76,6 @@ class SearchBox {
    * @param {Array<object> | undefined} data
    */
   searchResolve(data) {
-    console.log(data)
     if (data) {
       this.dropdownList.createItems(data) //创建列表项
       this.showList()
@@ -201,60 +200,6 @@ class SearchBox {
     }
   }
 
-  async selectItem(item) {
-    this.showLoading()
-    this.showList(false) //关闭列表项
-    window.getSelection().removeAllRanges() //移除输入框焦点
-
-    // let id = item.getAttribute("data-id"),
-    //   pic = item.getAttribute("data-img"),
-    //   title = item.getAttribute("data-title"),
-    //   author = item.getAttribute("data-author"),
-    //   url = item.getAttribute("data-url"),
-    //   year = item.getAttribute("data-year")
-
-    let html = await request(
-      "https://book.douban.com/subject/" + item.data.id,
-      "",
-      "get"
-    ) //访问豆瓣书目主页
-    // 正则匹配获取目录信息
-    let reg =
-      /<div class="indent" id="dir_\d+_full" style="display:none">([\s\S]*?)\(<a/
-    let result = html.match(reg),
-      dir = ""
-    if (result) {
-      dir = result[1].replace(/\s/g, "").replace(/<br\/>/g, "\n\n")
-    }
-    let now = new Date().toDateString()
-    // let content = `![img](${pic})\n\n**书目**：[${title}](${url})\n\n**作者**：${author} \n\n**出版年份**：${year}\n\n**标签**：\n\n**阅读日期**：${now}\n\n**在线阅读**：微信阅读\n\n### 推荐语\n\n\n\n### 阅读心得\n\n\n\n### 书摘\n\n\n\n### 知识应用\n\n\n\n### 相关阅读\n\n\n\n### 书籍目录\n\n\n\n${dir}`
-    const content = config.searchBox.template
-      .replace("{pic}", item.data.pic)
-      .replace("{title}", item.data.title)
-      .replace("{author}", item.data.author)
-      .replace("{url}", item.data.url)
-      .replace("{year}", item.data.year)
-      .replace("{dir}", item.data.dir)
-      .replace("{now}", now)
-
-    this.createDoc({ title: `《${item.data.title}》`, content: content })
-    this.showLoading(false)
-    this.showBox(false)
-    item.dom.classList.remove("on")
-  }
-
-  /* 创建文档 */
-  createDoc(doc) {
-    let data = {
-      notebook: "20220317102842-0fpuxs6", //笔记本ID
-      path: "/读书笔记/" + doc.title,
-      markdown: doc.content,
-    }
-    request("/api/filetree/createDocWithMd", data).then((res) => {
-      if (res.data) window.open(`siyuan://blocks/${res.data}`)
-    })
-  }
-
   showBox(show = true) {
     if (show) {
       this.isShow = true
@@ -286,29 +231,15 @@ class SearchBox {
         const res = reg.exec(txt)
         if (res) {
           const actionName = res[1]
-          const action = actions.find((item) => item.trigger.indexOf(actionName) > -1)
-          console.log(action)
+          const action = actions.find(
+            (item) => item.trigger.indexOf(actionName) > -1
+          )
           if (action) {
             this.createAction(action)
           }
         }
       }
     }
-  }
-
-  getBooks(keyword) {
-    // console.log('访问豆瓣...');
-    let url = `https://book.douban.com/j/subject_suggest?q=${keyword}`
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.length > 0) {
-          this.dropdownList.createItems(res) //创建列表项
-          this.showList()
-        } else {
-          this.showList(false)
-        }
-      })
   }
 
   createAction(action) {
@@ -334,6 +265,7 @@ class SearchBox {
     if (this.actionElement) this.actionElement.remove()
     this.actionName = ""
     this.action = null
+    this.showList(false)
     this.input.setAttribute("placeholder", this.defaultPlaceHolder)
   }
 

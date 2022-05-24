@@ -31,17 +31,18 @@ class DropdownList {
         ? `<div class="img"><img src="${item.img}" /></div>`
         : ""
 
+      const title = item.url
+        ? `<div class="title"><a href="${item.url}">${item.title}</a></div>`
+        : ` <div class="title">${item.title}</div>`
+
+      const subtitle = item.subtitle
+        ? `<div class="subtitle">${item.subtitle}</div>`
+        : ""
+
       html += `
-      <div class="list-item" 
-      data-id="${item.id}" 
-      data-title="${item.title}" 
-      data-img="${item.img}"  
-      data-url="${item.url}" >
+      <div class="list-item">
         ${img}
-        <div class="info">
-          <div class="title"><a href="${item.url}">${item.title}</a></div>
-          <div class="subtitle">${item.subtitle}</div>
-        </div>
+        <div class="info">${title}${subtitle}</div>
       </div>`
     })
 

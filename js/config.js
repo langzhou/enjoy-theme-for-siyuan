@@ -39,7 +39,7 @@ export const config = {
   searchBox: {
     notebook: "20220317102842-0fpuxs6", //笔记本ID
     path: "/读书笔记/",
-    template:`![img]({pic})\n\n**书目**：[{title}]({url})\n\n**作者**：{author} \n\n**出版年份**：{year}\n\n**标签**：\n\n**阅读日期**：{now}\n\n**在线阅读**：微信阅读\n\n### 推荐语\n\n\n\n### 阅读心得\n\n\n\n### 书摘\n\n\n\n### 知识应用\n\n\n\n### 相关阅读\n\n\n\n### 书籍目录\n\n\n\n{dir}`,
+    template:`![img]({img})\n\n**书目**：[{title}]({url})\n\n**作者**：{author} \n\n**出版年份**：{year}\n\n**标签**：\n\n**阅读日期**：{now}\n\n**在线阅读**：微信阅读\n\n### 推荐语\n\n\n\n### 阅读心得\n\n\n\n### 书摘\n\n\n\n### 知识应用\n\n\n\n### 相关阅读\n\n\n\n### 书籍目录\n\n\n\n{dir}`,
 
   },
 }
