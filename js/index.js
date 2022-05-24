@@ -76,7 +76,7 @@ class SiyuanPlugin {
 
     // 按键弹起事件
     window.addEventListener("keyup", (e) => {
-      if (this.searchBox) this.searchBox.actionTrigger(e)
+      if (this.searchBox) this.searchBox.handelKeyUp(e)
     })
 
     // 鼠标单击事件

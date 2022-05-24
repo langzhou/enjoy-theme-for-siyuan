@@ -1,9 +1,9 @@
 import dropdownList from "./DropdownList.js"
 import { request } from "../utils/network.js"
 import config from "../config.js"
-import {actions} from './SearchBoxActions.js'
+import { actions } from "./SearchBoxActions.js"
+import { snackbar } from "../utils/utils.js"
 
-console.log(Actions)
 class SearchBox {
   constructor() {
     this.searchBox = null
@@ -12,10 +12,18 @@ class SearchBox {
     this.isShow = false
     this.actionName = ""
     this.defaultPlaceHolder = "请输入命令"
+    this.action = null
+  }
+
+  handelKeyUp(e) {
+    // 输入框为空则收起列表项
+    if (this.isShow && this.input.innerText == "") this.showList(false)
+
+    this.actionTrigger(e)
   }
 
   handleKeyDown(e) {
-    // 移除 action 图标
+    // 移除 action
     if (
       this.isShow &&
       this.actionName &&
@@ -43,10 +51,108 @@ class SearchBox {
     // 选择列表项
     if (this.isShow && e.key == "Enter") {
       if (this.list.style.opacity == 1) {
-        this.selectItem(this.dropdownList.selectItem())
+        this.handleSelect(this.dropdownList.selectItem())
       } else {
-        this.handleInput(e)
+        this.handleSearch()
       }
+    }
+  }
+
+  handleSearch() {
+    this.showLoading()
+    if (this.action && this.action.search) {
+      this.action.search(
+        this.input.innerText,
+        this.searchResolve.bind(this),
+        this.searchReject.bind(this)
+      )
+    } else {
+      this.showLoading(false)
+    }
+  }
+
+  /**
+   * 搜索成功
+   * @param {Array<object> | undefined} data
+   */
+  searchResolve(data) {
+    if (data) {
+      this.dropdownList.createItems(data) //创建列表项
+      this.showList()
+    } else {
+      // 如果没有返回数据，则关闭搜索框
+      this.showBox(false)
+    }
+    this.showLoading(false)
+  }
+
+  /**
+   * 搜索出错
+   * @param {string | undefined} err
+   */
+  searchReject(err) {
+    snackbar(err || "出错啦", "danger")
+    this.showList(false)
+    this.showLoading(false)
+  }
+
+  /**
+   * 选中菜单项
+   * @param {object} item
+   * @param {number} item.index
+   * @param {object} item.data
+   * @param {object} item.dom
+   */
+  handleSelect(item) {
+    this.showLoading()
+    this.showList(false) //关闭列表项
+    window.getSelection().removeAllRanges() //移除输入框焦点
+
+    this.showLoading(false)
+    this.showBox(false)
+    item.dom.classList.remove("on")
+
+    if (this.action && this.action.select) {
+      this.action.select(
+        item.index,
+        item.data,
+        this.selectResolve.bind(this),
+        this.selectReject.bind(this)
+      )
+    }
+  }
+
+  /**
+   * 选中菜单项操作成功
+   * @param {string} msg toast提示信息
+   */
+  selectResolve(msg) {
+    if (msg) {
+      snackbar(msg, "success")
+    }
+  }
+
+  /**
+   * 选中菜单项操作失败
+   * @param {string | undefined} err toast提示信息
+   */
+  selectReject(err) {
+    snackbar(err || "出错啦", "danger")
+  }
+
+  handleInput(e) {
+    if (this.input && !this.input.innerText) this.showList(false) //输入框为空则收起列表项
+    // 屏蔽功能键
+    // let keys = ['ArrowDown','ArrowUp','ArrowLeft','ArrowRight','Escape','Enter','Tab']
+    // if(keys.indexOf(e.key) > -1) return
+
+    switch (this.actionName) {
+      case "豆瓣":
+        if (this.input.innerText) this.getBooks(this.input.innerText)
+        break
+
+      default:
+        break
     }
   }
 
@@ -54,7 +160,6 @@ class SearchBox {
     this.searchBox = document.querySelector("#lz-search-box")
     if (!this.searchBox) {
       let fragement = document.createDocumentFragment()
-
       this.box = document.createElement("div")
       this.box.className = "box"
       this.mask = document.createElement("div")
@@ -97,14 +202,18 @@ class SearchBox {
     this.showList(false) //关闭列表项
     window.getSelection().removeAllRanges() //移除输入框焦点
 
-    let id = item.getAttribute("data-id"),
-      pic = item.getAttribute("data-img"),
-      title = item.getAttribute("data-title"),
-      author = item.getAttribute("data-author"),
-      url = item.getAttribute("data-url"),
-      year = item.getAttribute("data-year")
+    // let id = item.getAttribute("data-id"),
+    //   pic = item.getAttribute("data-img"),
+    //   title = item.getAttribute("data-title"),
+    //   author = item.getAttribute("data-author"),
+    //   url = item.getAttribute("data-url"),
+    //   year = item.getAttribute("data-year")
 
-    let html = await request("https://book.douban.com/subject/" + id, "", "get") //访问豆瓣书目主页
+    let html = await request(
+      "https://book.douban.com/subject/" + item.data.id,
+      "",
+      "get"
+    ) //访问豆瓣书目主页
     // 正则匹配获取目录信息
     let reg =
       /<div class="indent" id="dir_\d+_full" style="display:none">([\s\S]*?)\(<a/
@@ -116,18 +225,18 @@ class SearchBox {
     let now = new Date().toDateString()
     // let content = `![img](${pic})\n\n**书目**：[${title}](${url})\n\n**作者**：${author} \n\n**出版年份**：${year}\n\n**标签**：\n\n**阅读日期**：${now}\n\n**在线阅读**：微信阅读\n\n### 推荐语\n\n\n\n### 阅读心得\n\n\n\n### 书摘\n\n\n\n### 知识应用\n\n\n\n### 相关阅读\n\n\n\n### 书籍目录\n\n\n\n${dir}`
     const content = config.searchBox.template
-      .replace("{pic}", pic)
-      .replace("{title}", title)
-      .replace("{author}", author)
-      .replace("{url}", url)
-      .replace("{year}", year)
-      .replace("{dir}", dir)
+      .replace("{pic}", item.data.pic)
+      .replace("{title}", item.data.title)
+      .replace("{author}", item.data.author)
+      .replace("{url}", item.data.url)
+      .replace("{year}", item.data.year)
+      .replace("{dir}", item.data.dir)
       .replace("{now}", now)
 
-    this.createDoc({ title: `《${title}》`, content: content })
+    this.createDoc({ title: `《${item.data.title}》`, content: content })
     this.showLoading(false)
     this.showBox(false)
-    item.classList.remove("on")
+    item.dom.classList.remove("on")
   }
 
   /* 创建文档 */
@@ -166,34 +275,19 @@ class SearchBox {
   }
 
   actionTrigger(e) {
-    // console.log(this.isShow);
     if (this.isShow) {
       let txt = this.input.innerText
       if (!this.actionName && txt) {
-        if (txt.search(/^豆瓣\s/) == 0) {
-          this.createAction("豆瓣", "请输入书籍名称")
-        }
-
-        if (txt.search(/^暗黑\s/) == 0) {
-          this.createAction("暗黑", "回车切换暗黑模式")
+        const reg = /^(\S+)\s/gi
+        const res = reg.exec(txt)
+        if (res) {
+          const actionName = res[1]
+          const action = actions.find((item) => item.name == actionName)
+          if (action) {
+            this.createAction(action)
+          }
         }
       }
-    }
-  }
-
-  handleInput(e) {
-    if (this.input && !this.input.innerText) this.showList(false) //输入框为空则收起列表项
-    // 屏蔽功能键
-    // let keys = ['ArrowDown','ArrowUp','ArrowLeft','ArrowRight','Escape','Enter','Tab']
-    // if(keys.indexOf(e.key) > -1) return
-
-    switch (this.actionName) {
-      case "豆瓣":
-        if (this.input.innerText) this.getBooks(this.input.innerText)
-        break
-
-      default:
-        break
     }
   }
 
@@ -212,20 +306,24 @@ class SearchBox {
       })
   }
 
-  createAction(name, placeholder) {
-    this.actionName = name
-    placeholder = placeholder || this.defaultPlaceHolder
-    this.action = document.createElement("div")
-    this.action.className = "action"
-    this.action.innerText = name
+  createAction(action) {
+    this.action = action
+    this.actionName = action.name
+    this.actionElement = document.createElement("div")
+    this.actionElement.className = "action"
+    this.actionElement.innerText = action.name
     this.input.innerText = ""
-    this.input.setAttribute("placeholder", placeholder)
-    this.box.insertBefore(this.action, this.input)
+    this.input.setAttribute(
+      "placeholder",
+      action.placeholder || this.defaultPlaceHolder
+    )
+    this.box.insertBefore(this.actionElement, this.input)
   }
 
   removeAction() {
-    if (this.action) this.action.remove()
+    if (this.actionElement) this.actionElement.remove()
     this.actionName = ""
+    this.action = null
     this.input.setAttribute("placeholder", this.defaultPlaceHolder)
   }
 
