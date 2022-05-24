@@ -11,14 +11,14 @@ class SearchBox {
     this.mask = null
     this.isShow = false
     this.actionName = ""
-    this.defaultPlaceHolder = "请输入命令"
     this.action = null
+    this.defaultPlaceHolder = "请输入命令"
   }
 
   handelKeyUp(e) {
     // 输入框为空则收起列表项
-    if (this.isShow && this.input.innerText == "") this.showList(false)
-
+    // if (this.isShow && this.input.innerText == "") this.showList(false)
+    this.handleInput(e)
     this.actionTrigger(e)
   }
 
@@ -50,7 +50,7 @@ class SearchBox {
 
     // 选择列表项
     if (this.isShow && e.key == "Enter") {
-      if (this.list.style.opacity == 1) {
+      if (this.dropdownList.itemIndex > -1) {
         this.handleSelect(this.dropdownList.selectItem())
       } else {
         this.handleSearch()
@@ -76,6 +76,7 @@ class SearchBox {
    * @param {Array<object> | undefined} data
    */
   searchResolve(data) {
+    console.log(data)
     if (data) {
       this.dropdownList.createItems(data) //创建列表项
       this.showList()
@@ -91,7 +92,7 @@ class SearchBox {
    * @param {string | undefined} err
    */
   searchReject(err) {
-    snackbar(err || "出错啦", "danger")
+    snackbar(err || "出错啦", "warning")
     this.showList(false)
     this.showLoading(false)
   }
@@ -108,10 +109,6 @@ class SearchBox {
     this.showList(false) //关闭列表项
     window.getSelection().removeAllRanges() //移除输入框焦点
 
-    this.showLoading(false)
-    this.showBox(false)
-    item.dom.classList.remove("on")
-
     if (this.action && this.action.select) {
       this.action.select(
         item.index,
@@ -120,6 +117,10 @@ class SearchBox {
         this.selectReject.bind(this)
       )
     }
+
+    this.showLoading(false)
+    this.showBox(false)
+    item.dom.classList.remove("on")
   }
 
   /**
@@ -137,23 +138,25 @@ class SearchBox {
    * @param {string | undefined} err toast提示信息
    */
   selectReject(err) {
-    snackbar(err || "出错啦", "danger")
+    snackbar(err || "出错啦", "warning")
   }
 
   handleInput(e) {
-    if (this.input && !this.input.innerText) this.showList(false) //输入框为空则收起列表项
     // 屏蔽功能键
-    // let keys = ['ArrowDown','ArrowUp','ArrowLeft','ArrowRight','Escape','Enter','Tab']
-    // if(keys.indexOf(e.key) > -1) return
+    let keys = [
+      "ArrowDown",
+      "ArrowUp",
+      "ArrowLeft",
+      "ArrowRight",
+      "Escape",
+      "Enter",
+      "Tab",
+    ]
 
-    switch (this.actionName) {
-      case "豆瓣":
-        if (this.input.innerText) this.getBooks(this.input.innerText)
-        break
+    if (keys.indexOf(e.key) > -1) return
 
-      default:
-        break
-    }
+    // 输入时移除选中项
+    if (this.input) this.dropdownList.removeItemOn()
   }
 
   create() {
@@ -169,6 +172,7 @@ class SearchBox {
       })
 
       this.input = document.createElement("div")
+      this.input.id = "lz-search-box-input"
       this.input.className = "input"
       this.input.setAttribute("contenteditable", true)
       this.input.setAttribute("placeholder", this.defaultPlaceHolder)
@@ -282,7 +286,8 @@ class SearchBox {
         const res = reg.exec(txt)
         if (res) {
           const actionName = res[1]
-          const action = actions.find((item) => item.name == actionName)
+          const action = actions.find((item) => item.trigger.indexOf(actionName) > -1)
+          console.log(action)
           if (action) {
             this.createAction(action)
           }
@@ -318,6 +323,11 @@ class SearchBox {
       action.placeholder || this.defaultPlaceHolder
     )
     this.box.insertBefore(this.actionElement, this.input)
+
+    if (action.default) {
+      this.dropdownList.createItems(action.default()) //创建列表项
+      this.showList()
+    }
   }
 
   removeAction() {
@@ -335,7 +345,7 @@ class SearchBox {
       this.list.style.display = "none"
       this.list.style.opacity = 0
     }
-    this.dropdownList.itemIndex = 0
+    this.dropdownList.itemIndex = -1
   }
 }
 

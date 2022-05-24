@@ -13,11 +13,11 @@
 
 ### 拓展功能
 
-#### 1. 行内评论
+#### 1. 行内评论 InlineComment
 
 支持划词评论。
 
-#### 2. 网页书签
+#### 2. 网页书签 LinkBookmark
 
 
 在网络链接编辑弹框中点击「复制网页书签」，然后粘贴到笔记正文中，即可插入 HTML 块，显示网页标签、摘要、配图（如果有）、链接。点击该 HTML 将跳转到对应的网页。
@@ -25,11 +25,22 @@
 ![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/linkcard-1.png)
 ![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/linkcard-2.png)
 
-#### 3. 快捷搜索框
+#### 3. 快捷搜索框 SearchBox
 
-`shift + alt + p` 呼出快捷搜索框
+`shift + alt + p` 呼出快捷搜索框，输入关键词 + 空格，即可触发模式搜索。
 
-暂时仅支持豆瓣书目搜索以及创建书目笔记。
+目前支持的搜索模式：
+
+- 豆瓣书目搜索
+  - 触发词：douban、豆瓣
+  - 支持书目搜索，并生成笔记正文（需要在 config 文件中配置内容模板）
+  - 已知问题：豆瓣对图片资源会进行 403 屏蔽
+- 暗黑模式切换
+  - 触发词：dark、暗黑
+  - 切换至暗黑模式
+- 主题切换
+  - 触发词：theme、主题
+  - 支持主题搜索，选中后回车即可切换主题
 
 ![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/searchbox.png)
 ### 主题预览

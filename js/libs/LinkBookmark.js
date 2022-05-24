@@ -1,7 +1,7 @@
 import { request } from "../utils/network.js";
 import { snackbar, copyText } from "../utils/utils.js";
 
-export default class LinkCard {
+export default class LinkBookmark {
   async domWatcher(mutation) {
     if (mutation.target.childNodes.length == 1) {
       let node = mutation.target.childNodes[0];
@@ -19,7 +19,7 @@ export default class LinkCard {
           btn.className = "b3-button b3-button--cancel";
           btn.innerText = "复制网页书签";
           btn.addEventListener("click", () => {
-            this.linkCard(link);
+            this.createLinkBookmark(link);
           });
           fragment.appendChild(span);
           fragment.appendChild(btn);
@@ -48,7 +48,7 @@ export default class LinkCard {
   //   if (inProtyle) {
   //     let selection = getSelection().toString();
   //     if (selection.indexOf("https://") >= 0) {
-  //       this.linkCard(selection);
+  //       this.createLinkBookmark(selection);
   //     }
   //   }
   // }
@@ -57,22 +57,22 @@ export default class LinkCard {
    * 根据 url 生成网页书签 html 内容块，并复制到剪贴板
    * @param {string} url
    */
-  async linkCard(url) {
+  async createLinkBookmark(url) {
     let data = await this.getUrlInfor(url);
-    copyText(this.createLinkCardHtml(data));
+    copyText(this.createHTML(data));
     snackbar("网页书签已生成，请进行粘贴", "success");
   }
 
   /**
    *
-   * @param {obj} data 示例：{
-   * title:'网页标题',
-   * intro:'网页正文摘要',
-   * url:'http://www.baidu.com',
-   * img:'http://www.baidu.com/pic.png'}
+   * @param {Object} data 
+   * @param {string} data.title  网页标题
+   * @param {string} data.intro  网页正文摘要
+   * @param {string} data.url  http://www.baidu.com
+   * @param {string} data.img  http://www.baidu.com/pic.png
    * @returns
    */
-  createLinkCardHtml(data) {
+  createHTML(data) {
     let img = data.image
       ? `<div class="cover"><img src="${data.image}" /></div>`
       : "";

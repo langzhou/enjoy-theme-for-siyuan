@@ -1,5 +1,5 @@
 import InlineComment from "./libs/InlineComment.js"
-import LinkCard from "./libs/LinkCard.js"
+import LinkBookmark from "./libs/LinkBookmark.js"
 import SearchBox from "./libs/SearchBox.js"
 import config from "./config.js"
 
@@ -9,7 +9,7 @@ class SiyuanPlugin {
     if (this.themeName) {
       // this.appendStyleSheet()
       this.inlineComment = new InlineComment()
-      this.linkCard = new LinkCard()
+      this.linkBookmark = new LinkBookmark()
       this.searchBox = new SearchBox()
       this.domWatcher()
       this.handleEvents()
@@ -87,7 +87,7 @@ class SiyuanPlugin {
     // 鼠标松开事件
     window.addEventListener("mouseup", (e) => {
       if (this.inlineComment) this.inlineComment.handleSelectionEvent(e)
-      // if (this.linkCard) this.linkCard.handleSelectionEvent(e);
+      // if (this.linkBookmark) this.linkBookmark.handleSelectionEvent(e);
     })
   }
 
@@ -134,7 +134,7 @@ class SiyuanPlugin {
     }
 
     if (this.inlineComment) this.inlineComment.domWatcher(mutation)
-    if (this.linkCard) this.linkCard.domWatcher(mutation)
+    if (this.linkBookmark) this.linkBookmark.domWatcher(mutation)
   }
 
   //添加工具条按钮

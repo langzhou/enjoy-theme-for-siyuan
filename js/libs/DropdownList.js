@@ -5,7 +5,7 @@ class DropdownList {
   constructor(list, itemSelector) {
     this.list = document.querySelector(list) //列表
     this.itemSelector = itemSelector //列表项选择器
-    this.itemIndex = 0 //选择项 index，默认选中第一项
+    this.itemIndex = -1 //选择项 index
     this.listItems = null //列表项: dom 元素
     this.listData = null //列表数据
   }
@@ -20,19 +20,19 @@ class DropdownList {
    * @param {string} data[].img 图片
    */
   createItems(data) {
+    if (!data) return
+
     this.listData = data
 
-    let html = "",
-      i = 0
+    let html = ""
 
     data.forEach((item) => {
-      i++
       const img = item.img
         ? `<div class="img"><img src="${item.img}" /></div>`
         : ""
 
       html += `
-      <div class="list-item${i == 1 ? " on" : ""}" 
+      <div class="list-item" 
       data-id="${item.id}" 
       data-title="${item.title}" 
       data-img="${item.img}"  
@@ -46,7 +46,7 @@ class DropdownList {
     })
 
     this.list.innerHTML = html
-    this.itemIndex = 0
+    this.itemIndex = -1
     this.listItems = document.querySelectorAll(this.itemSelector)
   }
 
@@ -131,17 +131,20 @@ class DropdownList {
         data: this.listData[this.itemIndex],
         dom: items[this.itemIndex],
       }
-    }else{
+    } else {
       return null
     }
   }
 
-  // selectItem() {
-  //   let items = this.listItems
-  //   if (this.itemIndex != -1) {
-  //     return items[this.itemIndex]
-  //   }
-  // }
+  // 移除选中项
+  removeItemOn() {
+    if (this.listItems && this.itemIndex != -1) {
+      this.listItems.forEach((item) => {
+        item.classList.remove("on")
+      })
+    }
+    this.itemIndex = -1
+  }
 
   /* 循环滚动列表 */
   scrollList() {
