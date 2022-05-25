@@ -43,6 +43,12 @@
   - 支持主题搜索，选中后回车即可切换主题
 
 ![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/searchbox.png)
+
+#### 4. 图片分享  ImageShare
+
+`shift + alt + s` 将选中的文字以图片形式分享。
+
+![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/imageshare.png)
 ### 主题预览
 
 

@@ -45,7 +45,7 @@ strong[style="blank"]:hover{
 }
 
 
-/* Inline comment */
+/* 行内评论 Inline comment */
 strong[style*="quote"]{
   border-bottom: 2px solid rgb(255, 212, 0);
   background-color: rgba(255,212,0,0.16);
@@ -516,4 +516,123 @@ strong[style*="quote"]:hover{
   transition: opacity 150ms linear;
   display: block;
   opacity: 1;
+}
+
+
+/* 图片分享 ImageShare.js */
+#lz-image-container{
+  position: absolute;
+  left: -9999px;
+  font-size: 40px;
+  width: 1200px;
+  padding: 1em;
+  line-height: 1.7em;
+}
+#lz-image-container div[contenteditable="true"]{
+  margin: 0.5em 0;
+}
+#lz-image-container u{
+  text-decoration: none;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  padding-bottom: 2px;
+}
+#lz-image-box{
+  position: fixed;
+  top: 100px;
+  left: calc(50% - 250px);
+  width: 500px;
+  overflow: hidden;
+  z-index: 1000;
+  border-radius: 4px;
+  box-shadow: var(--b3-dialog-shadow);
+  background-color: var(--b3-theme-surface);
+}
+#lz-image-box .header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+}
+#lz-image-box .title{
+  font-size: 18px;
+  margin-right: 5px;
+}
+#lz-image-box .themes{
+  display: flex;
+  align-items: center;
+
+}
+#lz-image-box .theme{
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  margin: 0 5px;
+  cursor: pointer;
+  border: 1px solid var(--b3-border-color);
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+}
+#lz-image-box .theme.on{
+  /* border: 2px solid var(--b3-theme-primary) !important; */
+  box-shadow: 0 0 2px var(--b3-theme-primary);
+}
+
+.image-theme-black{
+  background-color: #444;
+  color: #efefef;
+}
+.image-theme-white{
+  background-color: #fafafa;
+  color: #444;
+
+}
+.image-theme-yellow{
+  background-color: #fffcf7;
+  color: #665542;
+}
+.image-font-font1{
+  font-family: 'LXGWWenKai';
+}
+.image-font-font2{
+  font-family: "Pingfang SC", "quote", "Helvetica Neue", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
+
+}
+
+#lz-image-box .btn{
+  padding: 2px 10px;
+  margin-left: 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+}
+#lz-image-box .btn.copy{
+  border: 1px solid var(--b3-theme-primary);
+  color: var(--b3-theme-primary);
+  background-color: var(--b3-theme-on-primary);
+}
+#lz-image-box .btn.save{
+  border: 1px solid var(--b3-theme-primary);
+  background-color: var(--b3-theme-primary);
+  color: var(--b3-theme-on-primary);
+}
+#lz-image-box .image{
+  min-height: 150px;
+  max-height: 550px;
+  overflow-y: scroll;
+}
+#lz-image-box .image::-webkit-scrollbar{
+  width: 3px;
+  border-radius: 5px;
+}
+#lz-image-box .image .tips{
+  text-align: center;
+  padding-top: 50px;
+}
+#lz-image-box .image img{
+  width: 100%;
 }

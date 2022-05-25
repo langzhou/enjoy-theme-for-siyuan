@@ -1,6 +1,7 @@
 import InlineComment from "./libs/InlineComment.js"
 import LinkBookmark from "./libs/LinkBookmark.js"
 import SearchBox from "./libs/SearchBox.js"
+import ImageShare from "./libs/ImageShare.js"
 import config from "./config.js"
 
 class SiyuanPlugin {
@@ -36,14 +37,14 @@ class SiyuanPlugin {
     // }
 
     // shift+alt+s 弹出图片分享
-    // if(e.shiftKey && e.altKey && e.code =='KeyS'){
-    //   e.preventDefault()
-    //   e.stopPropagation()
-    //   if(!this.imageShare){
-    //     this.imageShare = new ImageShare()
-    //   }
-    //   this.imageShare.showBox()
-    // }
+    if (e.shiftKey && e.altKey && e.code == "KeyS") {
+      e.preventDefault()
+      e.stopPropagation()
+      if (!this.imageShare) {
+        this.imageShare = new ImageShare()
+      }
+      this.imageShare.showBox()
+    }
 
     // shift+alt+p 弹出快捷搜索框
     if (e.shiftKey && e.altKey && e.code == "KeyP") {
