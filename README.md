@@ -48,7 +48,7 @@
 
 `shift + alt + s` 将选中的文字以图片形式分享。
 
-![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/imageshare.png)
+![preview](https://raw.githubusercontent.com/langzhou/enjoy-theme-for-siyuan/main/previews/imageshare∆.png)
 ### 主题预览
 
 

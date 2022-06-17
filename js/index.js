@@ -3,6 +3,7 @@ import LinkBookmark from "./libs/LinkBookmark.js"
 import SearchBox from "./libs/SearchBox.js"
 import ImageShare from "./libs/ImageShare.js"
 import config from "./config.js"
+import html2canvas from "./packages/html2canvas.esm.js"
 
 class SiyuanPlugin {
   constructor() {
@@ -16,6 +17,8 @@ class SiyuanPlugin {
       this.handleEvents()
       setTimeout(() => this.appendToolbarBtn(), 1000) //添加 toolbar 评论按钮
     }
+
+   
   }
 
   /* 快捷键注册 */
@@ -143,24 +146,25 @@ class SiyuanPlugin {
     // 初始化时找到所有 protyle-toolbar
     let toolbars = document.querySelectorAll(".protyle-toolbar")
     const data = {
-      type: "test",
-      label: "添加评论",
+      type: "image",
+      label: "生成图片",
       divider: false,
       icon: "comment",
       func: (e) => {
-        console.log(e)
+        if(!this.imageShare) this.imageShare = new ImageShare()
+        this.imageShare.showBox()
       },
     }
 
-    // if (toolbars) {
-    //   toolbars.forEach((item, index, node) => {
-    //     // console.log(item);
-    //     if (!item.querySelector(`[data-type="${data.type}"]`)) {
-    //       let fragment = this.createToolbarBtn(data)
-    //       item.appendChild(fragment)
-    //     }
-    //   })
-    // }
+    if (toolbars) {
+      toolbars.forEach((item, index, node) => {
+        // console.log(item);
+        if (!item.querySelector(`[data-type="${data.type}"]`)) {
+          let fragment = this.createToolbarBtn(data)
+          item.appendChild(fragment)
+        }
+      })
+    }
   }
 
   createToolbarBtn(data) {
@@ -215,3 +219,5 @@ class SiyuanPlugin {
 }
 
 new SiyuanPlugin()
+
+

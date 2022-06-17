@@ -119,6 +119,7 @@
 /* 边栏搜索 */
 .search__label .b3-form__icon-input {
   background-color: transparent;
+  box-shadow:none;
 }
 
 /* 边栏分割线 */
@@ -1131,13 +1132,28 @@ div[data-type="more"] > svg {
 /**** 双向链接、块引用 ****/
 /* 样式一：下划线 */
 .protyle-wysiwyg [data-node-id] span[data-type="block-ref"] {
-  border-bottom: 1px dashed var(--b3-theme-primary);
-  padding: 2px 0;
-  margin: 0px 2px;
+  margin-right:  2px;
+  font-weight:bold;
+  text-decoration: 0.1em solid var(--b3-theme-on-surface) underline;
+    text-underline-offset: 0.3em;
 }
 
 .protyle-wysiwyg [data-node-id] span[data-type="block-ref"]:hover {
   background-color: var(--b3-theme-primary-lightest);
+}
+
+.protyle-wysiwyg [data-node-id] span[data-type="block-ref"]::before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 1em 1em;
+    background-image: url(../assets/page.svg);
+    width: 1em;
+    height: 1em;
+    margin-right: 0.2em;
+    margin-left: 5px;
+    top: 0.17em;
 }
 
 /* 样式一 代码结束 */
@@ -1162,6 +1178,14 @@ div[data-type="more"] > svg {
 [style*="background-color"] em {
   color: inherit;
 }
+strong[style*="background-color"]{
+padding:0 4px;
+
+}
+/* strong[style*="color"]:not([style*="background-color"]){
+font-weight:normal;
+} */
+
 
 /**** 下划线、删除线 ****/
 [style*="background-color"] s {
@@ -1207,6 +1231,17 @@ div[data-type="more"] > svg {
 }
 
 /**** 标签 ****/
+/* 默认标签样式 */
+span[data-type="tag"]{
+  background-color: var(--b3-card-warning-background);
+  color: var(--b3-card-warning-color) !important;
+  border: none !important;
+  font-size: 90%;
+  padding: 1px 8px;
+  margin: 0px;
+  border-radius: 50px;
+  font-weight:bold;
+}
 /* 红色标签 */
 span[data-type="tag"][data-content="紧急"],
 span[data-type="tag"][data-content="高优先级"],
@@ -1219,9 +1254,8 @@ span[data-type="tag"][data-content="问题"] {
   color: var(--b3-card-error-color) !important;
   border: none !important;
   font-size: 90%;
-  padding: 0 4px;
-  margin: 0 2px;
-  border-radius: 2px;
+
+
 }
 
 /* 橙色标签 */
@@ -1236,9 +1270,8 @@ span[data-type="tag"][data-content="提示"] {
   color: var(--b3-card-warning-color) !important;
   border: none !important;
   font-size: 90%;
-  padding: 0 4px;
-  margin: 0 2px;
-  border-radius: 2px;
+
+
 }
 
 /* 绿色标签 */
@@ -1249,9 +1282,8 @@ span[data-type="tag"][data-content="低优先级"] {
   color: var(--b3-card-success-color) !important;
   border: none !important;
   font-size: 90%;
-  padding: 0 4px;
-  margin: 0 2px;
-  border-radius: 2px;
+
+
 }
 
 /**** 颜色卡片 ****/
