@@ -1232,7 +1232,7 @@ font-weight:normal;
 
 /**** 标签 ****/
 /* 默认标签样式 */
-span[data-type="tag"]{
+.protyle-wysiwyg span[data-type="tag"]{
   background-color: var(--b3-card-warning-background);
   color: var(--b3-card-warning-color) !important;
   border: none !important;

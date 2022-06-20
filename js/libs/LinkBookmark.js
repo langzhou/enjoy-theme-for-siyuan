@@ -1,30 +1,23 @@
-import { request } from "../utils/network.js";
-import { snackbar, copyText } from "../utils/utils.js";
+import { request } from "../utils/network.js"
+import { snackbar, copyText } from "../utils/utils.js"
 
 export default class LinkBookmark {
   async domWatcher(mutation) {
-    if (mutation.target.childNodes.length == 1) {
-      let node = mutation.target.childNodes[0];
-      // 首先获取弹框元素，然后判断是否为网络链接
-      if (node.className && node.className == "b3-form__space--small") {
-        const span = node.querySelector("label > span"); //获取第一个span元素
-        if (span && span.innerText == "链接") {
-          const link = node.querySelector("label > input").value;
-          if (link.indexOf("http") == -1) return; //不是网络链接则返回
-          const boxFooter = node.querySelectorAll("div.fn__flex:last-child")[0];
-          const fragment = document.createDocumentFragment();
-          const span = document.createElement("span");
-          span.classList.add("fn__space");
-          const btn = document.createElement("button");
-          btn.className = "b3-button b3-button--cancel";
-          btn.innerText = "复制网页书签";
-          btn.addEventListener("click", () => {
-            this.createLinkBookmark(link);
-          });
-          fragment.appendChild(span);
-          fragment.appendChild(btn);
-          boxFooter.appendChild(fragment);
-        }
+    const target = mutation.target
+    const childNodes = target.childNodes
+    if (target.id == "commonMenu" && childNodes.length == 4) {
+      const firstButton = childNodes[0]
+      const input = firstButton.querySelector("span > input")
+      if (input && input.getAttribute("placeholder") == "链接") {
+        const link = input.value
+        if (link.indexOf("http") == -1) return //不是网络链接则返回
+        const button = document.createElement("button")
+        button.className = "b3-menu__item b3-menu__item--custom"
+        button.innerText = "复制网页书签"
+        button.addEventListener("click", () => {
+          this.createLinkBookmark(link)
+        })
+        target.appendChild(button)
       }
     }
   }
@@ -58,14 +51,14 @@ export default class LinkBookmark {
    * @param {string} url
    */
   async createLinkBookmark(url) {
-    let data = await this.getUrlInfor(url);
-    copyText(this.createHTML(data));
-    snackbar("网页书签已生成，请进行粘贴", "success");
+    let data = await this.getUrlInfor(url)
+    copyText(this.createHTML(data))
+    snackbar("网页书签已生成，请进行粘贴", "success")
   }
 
   /**
    *
-   * @param {Object} data 
+   * @param {Object} data
    * @param {string} data.title  网页标题
    * @param {string} data.intro  网页正文摘要
    * @param {string} data.url  http://www.baidu.com
@@ -75,7 +68,7 @@ export default class LinkBookmark {
   createHTML(data) {
     let img = data.image
       ? `<div class="cover"><img src="${data.image}" /></div>`
-      : "";
+      : ""
     return `<div class="link-card" onclick="window.open('${data.url}')">
     <div class="main">
     <div>
@@ -132,7 +125,7 @@ export default class LinkBookmark {
     border-radius:2px;
     object-fit:cover;
     }
-    </style>`;
+    </style>`
   }
 
   /**
@@ -142,41 +135,41 @@ export default class LinkBookmark {
    * @todo 获取页面信息的方式需要优化，防止 403
    */
   getUrlInfor(url) {
-    let self = this;
+    let self = this
     return new Promise(function (resolve, reject) {
       request(url, {}, "GET")
         .then((res) => {
           // 将获取到的 html 文本转化成 dom，然后调用 querySelector 方法
-          let iframe = document.createElement("div");
-          iframe.innerHTML = res;
-          let nodes = iframe.querySelectorAll("p"); //获取页面中的所有p标签
-          let intro = "";
+          let iframe = document.createElement("div")
+          iframe.innerHTML = res
+          let nodes = iframe.querySelectorAll("p") //获取页面中的所有p标签
+          let intro = ""
           // 拼接摘要，大于阈值时停止
           for (let node of nodes) {
-            intro += node.innerText;
+            intro += node.innerText
             if (intro.length > 150) {
-              break;
+              break
             }
           }
           // 当获取不到 title 标签时尝试取 h1 的文本值
           let title =
             iframe.querySelector("title").innerText != ""
               ? iframe.querySelector("title").innerText
-              : iframe.querySelector("h1").innerText;
-          let image = iframe.querySelector("img");
-          if (image) image = image.getAttribute("src");
+              : iframe.querySelector("h1").innerText
+          let image = iframe.querySelector("img")
+          if (image) image = image.getAttribute("src")
           resolve({
             title: self.clearText(title),
             url: url,
             intro: self.clearText(intro, 150),
             image: image,
-          });
+          })
         })
         .catch((err) => {
-          console.log(err);
-          reject();
-        });
-    });
+          console.log(err)
+          reject()
+        })
+    })
   }
 
   /**
@@ -186,12 +179,11 @@ export default class LinkBookmark {
    * @returns 处理后的字符串
    */
   clearText(text, length = 0) {
-    text = text.replace(/[\r\n]/g, "").replace(/\ +/g, "");
+    text = text.replace(/[\r\n]/g, "").replace(/\ +/g, "")
     if (length > 0) {
-      return text.substr(0, length);
+      return text.substr(0, length)
     } else {
-      return text;
+      return text
     }
   }
 }
-

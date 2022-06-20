@@ -97,9 +97,10 @@ class SiyuanPlugin {
 
   /* 检测 dom 变动，用于动态插入元素 */
   domWatcher() {
-    var targetNode = document.querySelector(
-      ".layout__center.fn__flex.fn__flex-1"
-    )
+    // var targetNode = document.querySelector(
+    //   ".layout__center.fn__flex.fn__flex-1"
+    // )
+    const targetNode = document.querySelector('body')
     if (!targetNode) {
       setTimeout(() => {
         this.domWatcher()
@@ -136,7 +137,6 @@ class SiyuanPlugin {
         }, 1000)
       }
     }
-
     if (this.inlineComment) this.inlineComment.domWatcher(mutation)
     if (this.linkBookmark) this.linkBookmark.domWatcher(mutation)
   }
